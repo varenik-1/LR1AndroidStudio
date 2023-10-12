@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BullsAndCowsActivity extends AppCompatActivity {
+public class MainActivity  extends AppCompatActivity {
 
     private Random random;
     private List<Integer> secretNumber;
     private int attemptsCount;
     private TextView attemptsTextView;
     private EditText guessEditText;
+    private Boolean isNew = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class BullsAndCowsActivity extends AppCompatActivity {
     private void checkGuess() {
         String guessString = guessEditText.getText().toString().trim();
 
-        if (guessString.length() == 4) {
+        if ((guessString.length() == 4)&&(guessString.charAt(0)!='0')) {
             List<Integer> guessList = convertStringToList(guessString);
 
 // Calculate bulls and cows
@@ -106,4 +107,37 @@ public class BullsAndCowsActivity extends AppCompatActivity {
         attemptsCount = 0;
         updateAttempts();
     }
+
+    public void clickNumber(View view) {
+
+        if(isNew)
+            guessEditText.setText("");
+        isNew = false;
+
+        String number = guessEditText.getText().toString();
+
+        if(view.getId()==R.id.button7)
+            number = number + "7";
+        else if(view.getId()==R.id.button6)
+            number = number + "6";
+        else if(view.getId()==R.id.button5)
+            number = number + "5";
+        else if(view.getId()==R.id.button4)
+            number = number + "4";
+        else if(view.getId()==R.id.button3)
+            number = number + "3";
+        else if(view.getId()==R.id.button2)
+            number = number + "2";
+        else if(view.getId()==R.id.button1)
+            number = number + "1";
+        else if(view.getId()==R.id.button9)
+            number = number + "9";
+        else if(view.getId()==R.id.button8)
+            number = number + "8";
+        else
+            number = number + "0";
+
+        guessEditText.setText(number);
+    }
+
 }
