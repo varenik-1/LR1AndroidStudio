@@ -17,6 +17,7 @@ public class MainActivity  extends AppCompatActivity {
     private List<Integer> secretNumber;
     private int attemptsCount;
     private TextView attemptsTextView;
+    private TextView bandcTextView;
     private EditText guessEditText;
     private Boolean isNew = true;
 
@@ -31,6 +32,7 @@ public class MainActivity  extends AppCompatActivity {
 
         attemptsTextView = findViewById(R.id.attemptsTextView);
         guessEditText = findViewById(R.id.guessEditText);
+        bandcTextView = findViewById(R.id.bandcTextView);
 
         Button guessButton = findViewById(R.id.guessButton);
         guessButton.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +41,6 @@ public class MainActivity  extends AppCompatActivity {
                 checkGuess();
             }
         });
-
         updateAttempts();
     }
 
@@ -61,7 +62,7 @@ public class MainActivity  extends AppCompatActivity {
             }
 
 // Show feedback to the player
-            Toast.makeText(this, "Bulls: " + bulls + ", Cows: " + cows, Toast.LENGTH_SHORT).show();
+            bandcTextView.setText("Bulls: " + bulls + ", Cows: " + cows);
 
 // Check if the player has won
             if (bulls == 4) {
@@ -75,6 +76,7 @@ public class MainActivity  extends AppCompatActivity {
             guessEditText.setText("");
         } else {
             Toast.makeText(this, "Please enter a 4-digit number.", Toast.LENGTH_SHORT).show();
+            guessEditText.setText("");
         }
     }
 
@@ -108,7 +110,7 @@ public class MainActivity  extends AppCompatActivity {
         updateAttempts();
     }
 
-    public void clickNumber(View view) {
+    public void onNumberButtonClick(View view) {
 
         if(isNew)
             guessEditText.setText("");

@@ -14,6 +14,8 @@
         android:textSize="20sp"
         android:text="Attempts: 0" />
 
+
+
     <EditText
         android:id="@+id/guessEditText"
         android:layout_width="match_parent"
@@ -112,6 +114,13 @@
             android:text="0" />
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/bandcTextView"
+        android:layout_width="139dp"
+        android:layout_height="119dp"
+        android:layout_below="@+id/guessEditText"
+        android:layout_marginTop="172dp" />
 
 
 </RelativeLayout>
