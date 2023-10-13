@@ -16,10 +16,13 @@ public class MainActivity  extends AppCompatActivity {
     private Random random;
     private List<Integer> secretNumber;
     private int attemptsCount;
+    private Button guessButton;
     private TextView attemptsTextView;
     private TextView bandcTextView;
     private EditText guessEditText;
     private Boolean isNew = true;
+    private String guessString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,8 @@ public class MainActivity  extends AppCompatActivity {
         attemptsTextView = findViewById(R.id.attemptsTextView);
         guessEditText = findViewById(R.id.guessEditText);
         bandcTextView = findViewById(R.id.bandcTextView);
+        guessButton = findViewById(R.id.guessButton);
 
-        Button guessButton = findViewById(R.id.guessButton);
         guessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +48,7 @@ public class MainActivity  extends AppCompatActivity {
     }
 
     private void checkGuess() {
-        String guessString = guessEditText.getText().toString().trim();
+        guessString = guessEditText.getText().toString().trim();
 
         if ((guessString.length() == 4)&&(guessString.charAt(0)!='0')) {
             List<Integer> guessList = convertStringToList(guessString);
@@ -141,5 +144,4 @@ public class MainActivity  extends AppCompatActivity {
 
         guessEditText.setText(number);
     }
-
 }
