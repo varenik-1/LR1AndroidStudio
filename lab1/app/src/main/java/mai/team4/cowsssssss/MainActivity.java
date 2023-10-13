@@ -32,7 +32,7 @@ public class MainActivity  extends AppCompatActivity {
         random = new Random();
         secretNumber = generateSecretNumber();
 
-        //Toast.makeText(this, "Please enter a number without repeating digits.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,secretNumber.toString(), Toast.LENGTH_SHORT).show();
 
         attemptsCount = 0;
 
@@ -152,9 +152,14 @@ public class MainActivity  extends AppCompatActivity {
     private boolean digitsInString(String string) {
         boolean repeat = false;
         int i = 0;
-        while (i < string.length()) {
-            if(string.contains(String.valueOf(string.charAt(i))))
-                repeat = true;
+        int j =0;
+        while (i < string.length()-1) {
+            while (j < (string.length()-(i+1))){
+                if(string.charAt(i)==string.charAt(string.length()-j-1))
+                    repeat = true;
+                ++j;
+            }
+            j=0;
             ++i;
         }
 
