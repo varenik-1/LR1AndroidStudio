@@ -31,6 +31,9 @@ public class MainActivity  extends AppCompatActivity {
 
         random = new Random();
         secretNumber = generateSecretNumber();
+
+        //Toast.makeText(this, "Please enter a number without repeating digits.", Toast.LENGTH_SHORT).show();
+
         attemptsCount = 0;
 
         attemptsTextView = findViewById(R.id.attemptsTextView);
@@ -51,9 +54,12 @@ public class MainActivity  extends AppCompatActivity {
         guessString = guessEditText.getText().toString().trim();
 
         if ((guessString.length() == 4)&&(guessString.charAt(0)!='0')) {
+            if(digitsInString(guessString)) {
+                Toast.makeText(this, "Please enter a number without repeating digits.", Toast.LENGTH_SHORT).show();
+                guessEditText.setText("");
+            }
             List<Integer> guessList = convertStringToList(guessString);
 
-// Calculate bulls and cows
             int bulls = 0;
             int cows = 0;
             for (int i = 0; i < secretNumber.size(); i++) {
@@ -64,20 +70,18 @@ public class MainActivity  extends AppCompatActivity {
                 }
             }
 
-// Show feedback to the player
             bandcTextView.setText("Bulls: " + bulls + ", Cows: " + cows);
 
-// Check if the player has won
             if (bulls == 4) {
                 Toast.makeText(this, "Congratulations! You won!", Toast.LENGTH_LONG).show();
                 restartGame();
             }
 
-// Update attempts count and clear the input field
             attemptsCount++;
             updateAttempts();
             guessEditText.setText("");
-        } else {
+        }
+        else {
             Toast.makeText(this, "Please enter a 4-digit number.", Toast.LENGTH_SHORT).show();
             guessEditText.setText("");
         }
@@ -143,5 +147,17 @@ public class MainActivity  extends AppCompatActivity {
             number = number + "0";
 
         guessEditText.setText(number);
+    }
+
+    private boolean digitsInString(String string) {
+        boolean repeat = false;
+        int i = 0;
+        while (i < string.length()) {
+            if(string.contains(String.valueOf(string.charAt(i))))
+                repeat = true;
+            ++i;
+        }
+
+        return repeat;
     }
 }
