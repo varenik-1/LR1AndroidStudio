@@ -22,6 +22,7 @@ public class MainActivity  extends AppCompatActivity {
     private EditText guessEditText;
     private Boolean isNew = true;
     private String guessString;
+    private static final int MAX_ATTEMPTS = 5;
 
 
     @Override
@@ -85,6 +86,12 @@ public class MainActivity  extends AppCompatActivity {
             Toast.makeText(this, "Please enter a 4-digit number.", Toast.LENGTH_SHORT).show();
             guessEditText.setText("");
         }
+        if (attemptsCount >= MAX_ATTEMPTS) {
+            Toast.makeText(this, "You have reached the maximum number of attempts.", Toast.LENGTH_SHORT).show();
+            restartGame();
+            return;
+        }
+
     }
 
     private List<Integer> generateSecretNumber() {
@@ -99,7 +106,8 @@ public class MainActivity  extends AppCompatActivity {
     }
 
     private void updateAttempts() {
-        attemptsTextView.setText("Attempts: " + attemptsCount);
+
+        attemptsTextView.setText(String.format("Attempts: %d/%d", attemptsCount, MAX_ATTEMPTS));
     }
 
     private List<Integer> convertStringToList(String numberString) {
@@ -115,6 +123,7 @@ public class MainActivity  extends AppCompatActivity {
         secretNumber = generateSecretNumber();
         attemptsCount = 0;
         updateAttempts();
+
     }
 
     public void onNumberButtonClick(View view) {
