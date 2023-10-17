@@ -33,7 +33,7 @@ public class MainActivity  extends AppCompatActivity {
         random = new Random();
         secretNumber = generateSecretNumber();
 
-        //Toast.makeText(this,secretNumber.toString(), Toast.LENGTH_SHORT).show();
+
 
         attemptsCount = 0;
 
